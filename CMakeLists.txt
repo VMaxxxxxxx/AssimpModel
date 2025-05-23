@@ -82,7 +82,9 @@ set(GUEST_ARTICLES
 
 # 生成配置头文件、配置include目录
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
-include_directories(${CMAKE_BINARY_DIR}/configuration)
+include_directories(${CMAKE_BINARY_DIR}/configuration
+    ${FRAMEWORK_INCLUDE_DIRS}
+)
 
 # stb_image.cpp、glad.c静态库生成，加入LIBS链接库列表
 # first create relevant static libraries required for other projects
@@ -121,7 +123,7 @@ function(create_project_from_sources chapter demo)
 
     # 生成可执行文件、链接前面设置好的库
     add_executable(${NAME} ${SOURCE})
-    target_link_libraries(${NAME} ${LIBS})
+    target_link_libraries(${NAME} ${LIBS} ${FRAMEWORK_LIBRARIES})
 
     # msvc专用编译、链接选项：指定c++标准、并行编译、忽略4099链接警告
     if(MSVC)
