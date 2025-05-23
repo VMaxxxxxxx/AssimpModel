@@ -6,7 +6,7 @@ project(08_FinishModel)
 set(CMAKE_CXX_STANDARD 17) # this does nothing for MSVC, use target_compile_options below
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
-
+set(DEPENDENCIES_DIR dependencies/)
 # 默认Debug构建模式
 IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
@@ -67,6 +67,7 @@ else()
   set(LIBS )
 endif(WIN32)
 
+add_subdirectory(${DEPENDENCIES_DIR}/framework)
 # 章节设置，是demo，但仅保留assimp模型加载的源码路径
 set(CHAPTERS
     3.model_loading
